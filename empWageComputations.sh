@@ -7,7 +7,8 @@ totalworkingDays=0;
 totalEmpHr=0;
 NUM_WORKING_DAYS=20;
 MAX_HRS_IN_MONTH=100;
-empCheck=$(( RANDOM%3 ));
+function getWorkHrs() {
+local empCheck=$1
 case $empCheck in
 $IS_FULL_TIME)
 empHrs=8
@@ -19,14 +20,17 @@ empHrs=4
 empHrs=0
 ;;
 esac
+echo $empHrs
+}
 while [[ $totalEmpHrs -lt $MAX_HRS_IN_MONTH &&
           $totalworkingDays -lt $NUM_WORKING_DAYS ]]
 do
 ((totalworkingDays++))
+empCheck=$(( RANDOM%3 ));
+empHrs="$( getWorkHrs $empCheck )"
 totalEmpHrs=$(( totalEmpHrs+empHrs ))
 dailyWage=$(( $empHrs*$EMP_RATE_PER_HR ))
 monthlywage=$(( monthlywage+dailyWage ))
 done
 echo daily wage of an employee is $dailyWage
 echo monthlywage of an employee is $monthlywage
-
