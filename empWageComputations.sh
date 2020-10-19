@@ -29,8 +29,11 @@ do
 empCheck=$(( RANDOM%3 ));
 empHrs="$( getWorkHrs $empCheck )"
 totalEmpHrs=$(( totalEmpHrs+empHrs ))
-dailyWage=$(( $empHrs*$EMP_RATE_PER_HR ))
+dailyWage[$totalworkingDays]=$(( $empHrs*$EMP_RATE_PER_HR ))
 monthlywage=$(( monthlywage+dailyWage ))
 done
+totalwage=$(( totalEmpHrs*EMP_RATE_PER_HR ));
 echo daily wage of an employee is $dailyWage
 echo monthlywage of an employee is $monthlywage
+echo totalwage of an employee is $totalwage
+echo daily wage of all days : ${dailyWage[@]}
