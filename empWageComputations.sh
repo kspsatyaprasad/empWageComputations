@@ -37,3 +37,4 @@ echo daily wage of an employee is $dailyWage
 echo monthlywage of an employee is $monthlywage
 echo totalwage of an employee is $totalwage
 echo daily wage of all days : ${dailyWage[@]}
+echo days corresponding to dailyWage : Day ${!dailyWage[@]}
