@@ -7,6 +7,7 @@ totalworkingDays=0;
 totalEmpHr=0;
 NUM_WORKING_DAYS=20;
 MAX_HRS_IN_MONTH=100;
+totalwage=0;
 function getWorkHrs() {
 local empCheck=$1
 case $empCheck in
@@ -30,10 +31,11 @@ empCheck=$(( RANDOM%3 ));
 empHrs="$( getWorkHrs $empCheck )"
 totalEmpHrs=$(( totalEmpHrs+empHrs ))
 dailyWage[$totalworkingDays]=$(( $empHrs*$EMP_RATE_PER_HR ))
-monthlywage=$(( monthlywage+dailyWage ))
+(( totalwage += ${dailyWage[$totalworkingDays]} ))
+monthlywage=$(( monthlywage+${dailyWage[$totalworkingDays]} ))
+echo "Day ${totalworkingDays}          ${dailyWage[$totalworkingDays]}         $totalwage"
 done
 totalwage=$(( totalEmpHrs*EMP_RATE_PER_HR ));
-echo daily wage of an employee is $dailyWage
 echo monthlywage of an employee is $monthlywage
 echo totalwage of an employee is $totalwage
 echo daily wage of all days : ${dailyWage[@]}
